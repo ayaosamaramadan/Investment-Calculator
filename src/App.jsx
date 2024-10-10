@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import Headerr from "./components/Headerr";
+import User from "./components/User";
+import Result from "./components/Result";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [initialInvestment, setInitialInvestment] = useState(400);
+  const [annualInvestment, setAnnualInvestment] = useState(6280);
+  const [expectedReturn, setExpectedReturn] = useState(9);
+  const [duration, setDuration] = useState(3);
+
+  function handleinitInves(e) {
+    setInitialInvestment(Number(e.target.value));
+  }
+
+  function handleannInves(e) {
+    setAnnualInvestment(Number(e.target.value));
+  }
+
+  function handlexpected(e) {
+    setExpectedReturn(Number(e.target.value));
+  }
+
+  function handleduration(e) {
+    setDuration(Number(e.target.value));
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Headerr />
+      <User
+        handleduration={handleduration}
+        handlexpected={handlexpected}
+        handleannInves={handleannInves}
+        handleinitInves={handleinitInves}
+        duration={duration}
+        expectedReturn={expectedReturn}
+        initialInvestment={initialInvestment}
+        annualInvestment={annualInvestment}
+      />
+      <Result
+        duration={duration}
+        expectedReturn={expectedReturn}
+        initialInvestment={initialInvestment}
+        annualInvestment={annualInvestment}
+      />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
